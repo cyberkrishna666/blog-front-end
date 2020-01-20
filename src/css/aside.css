@@ -1,0 +1,9 @@
+.aside_container {
+  border: 1px solid rgb(212, 212, 212);
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  margin: 1em;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
