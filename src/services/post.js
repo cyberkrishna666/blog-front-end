@@ -43,16 +43,12 @@ const deletePost = async (postId) => {
 const getOnePost = async (postId) => {
   const postUrl = baseUrl + postId + '/'
 
-  try {
-    const response = await axios({
-      method: 'get',
-      url: postUrl
-    })
+  const response = await axios({
+    method: 'get',
+    url: postUrl
+  })
     
     return response.data
-  } catch (exception) {
-    console.log(`cannot get a post, error: ${exception}`)
-  }
 }
 
 const getMostLikedPosts = async () => {
@@ -61,9 +57,21 @@ const getMostLikedPosts = async () => {
   return response.data
 }
 
-const getAllPosts = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getMostCommentedPosts = async () => {
+  const url = `${baseUrl}mostcommented/`
+  const response = await axios.get(url)
+  return response.data
+}
+
+const getRecentPosts = async () => {
+  const url = `${baseUrl}recent/`
+  const response = await axios.get(url)
+  return response.data
+}
+
+const getAllPosts = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 const updatePost = async (updatedPost, postId) => {
@@ -83,4 +91,4 @@ const updatePost = async (updatedPost, postId) => {
   }
 }
 
-export default { getAllPosts, createPost, deletePost, getOnePost, updatePost, getMostLikedPosts }
+export default { getAllPosts, createPost, deletePost, getOnePost, updatePost, getMostLikedPosts, getMostCommentedPosts, getRecentPosts }

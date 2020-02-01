@@ -18,7 +18,7 @@ function Comments({ comments, setComments, user }) {
   )
 
   return (
-    <div className="comments_container">
+    <div id="comments" className="comments_container">
       {mapAllComments()}
     </div>
   )

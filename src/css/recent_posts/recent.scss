@@ -1,0 +1,26 @@
+.most_recent_container {
+  margin: 2rem 0;
+  font-size: .8rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  // &>* {
+  //   flex: 1 1 auto;
+  // }
+
+  // &:first-child {
+  //   flex-grow: 1;
+  //   color: red;
+  //   background-color: black;
+  // }
+  
+  // &:nth-child(2) {
+  //   flex-grow: 3;
+  // }
+
+  // &:nth-child(3) {
+  //   flex-grow: 3;
+  // }
+  // flex-wrap: wrap;
+}

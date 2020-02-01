@@ -1,0 +1,65 @@
+$mobile_breakpoint: 414px;
+
+.login_container {
+  // position: relative;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .login_form {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+
+    .login_form_field {
+      align-self: center;
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+
+      label {
+        margin-left: auto;
+      }
+
+      input {
+        font-size: inherit;
+        border-radius: 1rem;
+        border: none;
+        background-color: rgb(240, 240, 240);
+        padding: .5rem 1rem;
+
+      }
+
+      
+    }
+
+    button {
+      font-size: inherit;
+      align-self: center;
+      justify-self: center;
+      padding: .5rem 2rem;
+      margin: .5rem 0;
+      background-color: inherit;
+      border: 1px solid rgb(44, 44, 44);
+      box-shadow: .1rem .1rem 0 rgb(44, 44, 44);
+    }
+  }
+
+  .error_message {
+    font-size: .8rem;
+    color: red;
+    position: absolute;
+    padding: 1rem 0;
+    bottom: 1rem;
+    align-self: center;
+  }
+
+  .signup {
+    margin: 1rem;
+  }
+}

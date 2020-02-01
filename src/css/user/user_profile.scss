@@ -1,0 +1,100 @@
+.profile_container {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid black;
+  box-shadow: 5px 5px rgb(65, 65, 65);
+}
+
+.profile_info {
+  text-align: left;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.username {
+  font-size: 0.9rem;
+  color: rgb(150, 150, 150);
+}
+
+.avatar_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 1.5rem;
+}
+
+.upload_button {
+  font-size: 1em;
+  flex-shrink: 0;
+  align-self: center;
+  background-color: white;
+  box-shadow: 2px 2px rgb(65, 65, 65);
+  padding: .5rem;
+  margin-bottom: .5rem;
+  border: 1px solid black;
+}
+
+.upload_button:hover {
+  cursor: pointer;
+}
+
+.upload {
+  position: absolute;
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+[type=file]:focus + .upload_button {
+  outline-color: rgb(77, 144, 254);
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+}
+
+
+img.avatar {
+  align-self: center;
+  border-radius: 50%;
+  margin-bottom: .5rem;
+}
+
+img.avatar_post {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.add_bio {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.add_bio textarea {
+  resize: vertical;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.user_bio > div {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.user_bio {
+  font-style: italic;
+}

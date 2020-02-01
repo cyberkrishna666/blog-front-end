@@ -1,5 +1,5 @@
 import PageLink from './PageLink'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 function Pagination({ posts, setPostsToShow, currentPage, setCurrentPage, totalPages, setTotalPages, baseLink, pagelessPagination }) {
@@ -7,16 +7,22 @@ function Pagination({ posts, setPostsToShow, currentPage, setCurrentPage, totalP
   const FIRST_PAGE = 1
   const SECOND_PAGE = 2
   const PAGES_TO_SHOW = 3
-  // const [ pagesToShow, setPagesToShow ] = useState([])
-  // const [ lastPage, setLastPage ] = useState(posts.length/POSTS_PER_PAGE)
+  const [ notFound, setNotFound ] = useState(false)
   const location = useLocation()
 
   
   useEffect( () => {
     const length = Math.ceil( posts.length/POSTS_PER_PAGE )
     setTotalPages([...Array(length)])
+    if ( currentPage > length ) {
+      console.log(currentPage + ' ' + length);
+      
+      setNotFound(true)
+    } else {
+      setNotFound(false)
+    }
     console.log('Pages created: ' + length)
-  }, [ currentPage, posts, setTotalPages, location.key ])
+  }, [ currentPage, posts, setTotalPages, location.key, totalPages.length ])
   
   
   useEffect( () => {
@@ -28,7 +34,7 @@ function Pagination({ posts, setPostsToShow, currentPage, setCurrentPage, totalP
   const mapAllPages = () => totalPages.map( (page, pageNumber) => (
     currentPage === pageNumber + 1
     ?
-    <span key={pageNumber + 1} style={ { marginLeft: "1rem", marginRight: "1rem" }}>{pageNumber + 1}</span>
+    <div className="current" key={pageNumber + 1}>{pageNumber + 1}</div>
     :
     <PageLink key={pageNumber + 1} setCurrentPage={setCurrentPage} pageNumber={pageNumber} pushTo={pageNumber + 1} pagelessPagination={pagelessPagination} />
     )
@@ -49,7 +55,9 @@ function Pagination({ posts, setPostsToShow, currentPage, setCurrentPage, totalP
     }
 
   return (
-    <div>
+    <>
+    { notFound ? <div className="not_found">no posts yet.</div> : 
+    <div className="pagination">
       { currentPage !== FIRST_PAGE ? <PageLink key={'first_page'} pushTo={FIRST_PAGE} text={'First'} baseLink={baseLink} pagelessPagination={pagelessPagination} setCurrentPage={setCurrentPage} /> : ''}
 
       { currentPage !== FIRST_PAGE ? <PageLink key={'previous_page'} pushTo={currentPage - 1} text={'Previous'} baseLink={baseLink} pagelessPagination={pagelessPagination} setCurrentPage={setCurrentPage}  /> : ''}
@@ -60,6 +68,8 @@ function Pagination({ posts, setPostsToShow, currentPage, setCurrentPage, totalP
 
       { currentPage !== totalPages.length ? <PageLink key={'last_page'} pushTo={totalPages.length} text={'Last'} baseLink={baseLink} pagelessPagination={pagelessPagination} setCurrentPage={setCurrentPage} /> : ''}
     </div>
+  }
+  </>
   )
 }
 

@@ -1,44 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import commentService from '../../../services/comment'
+import Dropdown from '../dropdown/Dropdown'
+import Avatar from '../common/Avatar'
+import { AuthContext } from '../../context/userContext'
 
 function Comment(props) {
-  const ref = useRef()
-  const [ showDropDown, setShowDropDown ] = useState(false)
+  const { userState } = useContext(AuthContext)
+  const [ showKebab, setShowKebab ] = useState(false)
+  const date = new Date(Date.parse(props.date)).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'})
 
-  const handleKebab = () => {
-    setShowDropDown(true)
-  }
-
-  function handleClickOutside(event) {
-    if (ref.current && !ref.current.contains(event.target)) {
-      setShowDropDown(false)
-      // alert("You clicked outside of me!");
+  useEffect( () => {
+    if ( userState.isAuthenticated ) {
+      if ( userState.globalUser.id === props.author.id ) {
+        setShowKebab(true)
+      } else {
+        setShowKebab(false)
+      }
     }
-  }
-
-  useEffect(() => {
-    // Bind the event listener
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("click", handleClickOutside);
-    }
-  })
-
-  // useEffect(() => {
-  //   window.onclick = function(event) {
-  //     if (!event.target.matches('.dropbtn')) {
-  //       var dropdowns = document.getElementsByClassName("dropdown-content");
-  //       var i;
-  //       for (i = 0; i < dropdowns.length; i++) {
-  //         var openDropdown = dropdowns[i];
-  //         if (openDropdown.classList.contains('show')) {
-  //           openDropdown.classList.remove('show');
-  //         }
-  //       }
-  //     }
-  //   } 
-  // }, [])
+  }, [userState.isAuthenticated, props.author.id, userState ])
 
   const handleCommentDelete = async () => {
     try {
@@ -46,7 +26,6 @@ function Comment(props) {
       props.setComments( props.comments.filter( comment => comment.id !== props.commentId ))
     } catch (error) {
       console.log('Error on attempt to delete comment: ' + error);
-      
     }
   }
 
@@ -54,25 +33,18 @@ function Comment(props) {
     <div className="comment">
       <header>
         <div className="comment_author">
-          @{props.author.username} at {props.date}
+          <Link to={`/@${props.author.username}`}>@{props.author.username}</Link>
+          <span className="date">at {date}</span>
         </div>
-          <div ref={ref}>
-            { props.user
-            ?
-            props.user.id === props.author.id
-            ?
-            <div className="comment_action_kebab">
-            <button onClick={handleKebab} className="dropbtn">...</button>
-            <div id={`myDropdown-${props.commentId}`} className={`dropdown-content ${ showDropDown ? 'show' : '' }`}>
-            <button className="deleteComment" onClick={handleCommentDelete}>Delete</button>
-            </div>
-          </div>
-            : '' : ''
-            }
-          </div>
+        { showKebab &&
+          <Dropdown>
+            <div className="dropdown_button" onClick={handleCommentDelete}>Delete</div>
+          </Dropdown>
+        }
       </header>
       <div className="comment_content">
-        {props.content}
+        <Avatar user={props.author} size={50} />
+        <div className="comment_text">{props.content}</div>
       </div>
     </div>
   )

@@ -1,0 +1,17 @@
+.main_footer {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: rgb(44, 44, 44);
+  padding: 1rem;
+
+  .about_us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 1rem;
+    border: none;
+    background-color: unset;
+  }
+}

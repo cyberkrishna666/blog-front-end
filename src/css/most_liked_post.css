@@ -1,9 +1,0 @@
-.most_liked_container {
-  display: inline-block;
-  min-width: 100%;
-  /* padding: 2rem; */
-}
-
-.most_liked_container a {
-  text-decoration: none;
-}

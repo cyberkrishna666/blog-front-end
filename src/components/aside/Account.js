@@ -1,33 +1,38 @@
 import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AuthContext } from '.././context/userContext'
+import { Link } from 'react-router-dom'
+import Avatar from '../main/common/Avatar'
+import ModalWindow from '../main/modal/ModalWindow'
+import { ModalContext } from '.././context/modalContext'
+import Login from '../main/authentication/Login'
 
-function Account({ setShowModal }) {
-  const { userState, dispatchUser } = useContext(AuthContext)
+function Account() {
+  const { modalState, dispatchModal } = useContext(ModalContext)
+  const { userState } = useContext(AuthContext)
   let history = useHistory()
 
-  const handleLogout = (event) => {
-    event.preventDefault()
-    
-    dispatchUser({ type: 'LOGOUT' })
-  }
-
   const userLogged = () => (
-    <div>
-      <span>Hello, <h2>{userState.globalUser.username}</h2></span>
-      <button onClick={handleLogout}>Log out</button>
+    <div className="account">
+      <Link to={`/@${userState.globalUser.username}`}>
+        <Avatar user={userState.globalUser} size={'100'}/>
+      </Link>
+      {userState.globalUser.name} {userState.globalUser.lastName}
+      <div className="actions_bar">
+        <Link to="/add"><button className="default_btn">Write a post</button></Link>
+      </div>
     </div>
   )
 
   const handleModal = () => {
-    setShowModal(true)
+    dispatchModal({ type: 'SHOW_MODAL'})
   }
 
   const auth = () => (
     <>
-    <button onClick={ () => handleModal() }>login</button>
+    <button className="default_btn" onClick={ () => handleModal() }>Login</button>
     <span>or</span>
-    <button onClick={ () => { history.push('/signup') }}>
+    <button className="default_btn" onClick={ () => { history.push('/signup') }}>
       Sign up
     </button>
     </>
@@ -36,6 +41,7 @@ function Account({ setShowModal }) {
   return (
     <div className="aside_container">
       { userState.isAuthenticated ? userLogged() : auth() }
+      { modalState.showModal && <ModalWindow><Login /></ModalWindow>}
     </div>
   )
 }

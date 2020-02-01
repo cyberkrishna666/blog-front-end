@@ -1,36 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import searchService from '../../../services/search'
+import { searchService } from '../../../services/search'
+import Spinner from '../common/Spinner'
 
 function SearchResults({ Posts }) {
   const [ posts, setPosts ] = useState([])
   const [loading, setLoading] = useState(true)
   let location = useLocation()
   const baseLink = `search?`
+  const query = new URLSearchParams(location.search).get('q')
   const pageId = new URLSearchParams(location.search).get('p')
+  const tag = new URLSearchParams(location.search).get('tag')
+  const { cancelRequest, getPostsBySearch } = searchService()
   
   useEffect( () => {
     async function fetchAllPosts() {
+      let fetchedPosts = []
       try {
-        const allPosts = await searchService.getPostsBySearch({ q: new URLSearchParams(location.search).get('q') })
-        setPosts(allPosts)
+        if (query) {
+          fetchedPosts = await getPostsBySearch({ q: query })
+        }
+        if (tag) {
+          fetchedPosts = await getPostsBySearch({ tag: tag })
+        }
+        if (fetchedPosts) {
+          setPosts(fetchedPosts)
+        }
         setTimeout( () => { setLoading(false) }, 300)
       } catch (exception) {
-        console.log(exception)
+        setPosts([])
+        setLoading(false)
       }
       return () => {
-        setTimeout( () => { setLoading(false) }, 3000)
+        setLoading(false)
+        cancelRequest()
       }
     }
 
     fetchAllPosts()
-  }, [ setPosts, location.key, location.search])
+  }, [ setPosts, location.key, cancelRequest, getPostsBySearch, query, tag ])
 
 
   return (
     <>
-    { loading ? <FontAwesomeIcon icon="spinner" spin /> : <Posts posts={posts} setPosts={setPosts} baseLink={baseLink} pageId={pageId} />}
+    { loading ?
+    <Spinner />
+    :
+    posts.length ?
+    <Posts posts={posts} setPosts={setPosts} baseLink={baseLink} pageId={pageId} />
+    :
+    <div className="not_found">NOTHING FOUND</div> }
     </>
   )
 }

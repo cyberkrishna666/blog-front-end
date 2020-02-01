@@ -20,9 +20,8 @@ function PageLink({ pushTo, text, baseLink, pagelessPagination, setCurrentPage }
   }
 
   return (
-    <button onClick={ location.search ? handleQueryChange : pagelessPagination? handlePagelessPagination : handlePageChange }>
+    <button className="page_link" onClick={ location.search ? handleQueryChange : pagelessPagination? handlePagelessPagination : handlePageChange }>
       { text ? text : pushTo }
-      { console.log( 'Pageless pagination: ' + pagelessPagination)}
     </button>
   )
 }

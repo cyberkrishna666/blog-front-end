@@ -1,10 +1,10 @@
 import React from 'react'
 import Nav from './Nav'
 
-const Header = () => {
+const Header = ({ showMobileMenu, setShowMobileMenu }) => {
   return (
     <header className="main_header">
-      <Nav/>
+      <Nav showMobileMenu={showMobileMenu} setShowMobileMenu={setShowMobileMenu} />
     </header>
   )
 }

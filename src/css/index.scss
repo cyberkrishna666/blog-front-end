@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import './user/avatar.scss';
+@import './full_post/comment.scss';
+@import './feed/pagination.scss';
+@import './post/add_post_page.scss';
+@import './post/post.scss';
+@import './aside/aside.scss';
+@import './full_post/full_post.scss';
+@import './dropdown/dropdown.scss';
+@import './post/edit_post.scss';
+@import './user/signup.scss';
+@import './post/most_liked_post.scss';
+@import './carousel/carousel.scss';
+@import './modal_window/modal_window.scss';
+@import './search/search_bar.scss';
+@import './search/search.scss';
+@import './spinner/spinner.scss';
+@import './header/nav.scss';
+@import './header/header.css';
+@import './user/user_profile.scss';
+@import './recent_posts/recent.scss';
+@import './recent_posts/post_previw.scss';
+@import './user/login.scss';
+@import './not_found.scss';
+@import './footer/footer.scss';
+
+$breakpoint-mobile: 414px;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  button:hover {
+      cursor: pointer;
+  }
+}
+
+html {
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+
+    .category_heading {
+        font-size: 2rem;
+        margin: 1rem 0;
+    }
+
+    .category_block {
+        margin: 2rem 0;
+    }
+}
+
+
+.main_container {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 1;
+
+    main {
+        flex: 1;
+        min-height: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0 1rem;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+            padding: 0;
+        }
+    }
+
+    aside {
+        align-self: flex-start;
+        position: sticky;
+        top: 3.2rem;
+        flex: 0 0 25vw;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+}
+
+.link_button {
+    border: none;
+    font-size: inherit;
+    text-decoration: underline;
+    background-color: unset;
+}
+
+.default_btn {
+    font-size: 1.2rem;
+    margin: .5rem 0;
+    background-color: inherit;
+    border: 1px solid rgb(50, 50, 50);
+    padding: .5rem 1rem;
+    box-shadow: .2rem .2rem rgb(50, 50, 50);
+}
+
+iframe {
+    height: 100%;
+    border: none;
+    padding: 1rem;
+}

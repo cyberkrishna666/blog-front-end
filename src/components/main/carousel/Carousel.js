@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import SingleMostLiked from '../root_page/most_liked/SingleMostLiked'
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 
 function Carousel({ mostLiked }) {
   const [ transformStyle, setTransformStyle ] = useState({})
   const [ currentSlide, setCurrentSlide ] = useState(1)
-  const SLIDES = 3
+  const SLIDES = 2
 
   const mapPosts = () => mostLiked.map( post =>
     <SingleMostLiked 
@@ -32,14 +33,16 @@ function Carousel({ mostLiked }) {
   }
 
   return (
+    <div className="carousel_wrapper">
+        <div className="button_wrapper">
+          <button onClick={currentSlide === 1 ? null : handleLeft}><FaArrowLeft/></button>
+          <button onClick={currentSlide === SLIDES ? handleLast : handleRight}><FaArrowRight/></button>
+        </div>
     <div className="carousel_container">
       <div className="carousel" style={transformStyle}>
         {mapPosts()}
       </div>
-        <div className="button_wrapper">
-  <button onClick={currentSlide === 1 ? null : handleLeft}>{'<'}</button>
-  <button onClick={currentSlide === SLIDES ? handleLast : handleRight}>{'>'}</button>
-        </div>
+    </div>
     </div>
   )
 }

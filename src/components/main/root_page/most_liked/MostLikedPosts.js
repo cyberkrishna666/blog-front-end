@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import postService from '../../../../services/post'
 import Carousel from '../../carousel/Carousel'
 
-function MostLikedPosts(props) {
+function MostLikedPosts() {
   const [ mostLiked, setMostLiked ] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect( () => {
     async function fetchMostLikedPosts() {
@@ -24,9 +24,16 @@ function MostLikedPosts(props) {
   }, [])
 
   return (
-    <div>
-      { loading ? 'loading...' : <Carousel mostLiked={mostLiked} /> }
+    <>
+    { !loading && 
+    <div className="category_block">
+      <div className="category_heading">Top liked</div>
+      <div>
+       <Carousel mostLiked={mostLiked} />
+      </div>
     </div>
+    }
+    </>
   )
 }
 

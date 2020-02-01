@@ -1,0 +1,58 @@
+ /* Dropdown Button */
+ .dropbtn {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  font-size: 1.5rem;
+}
+
+.comment_action_kebab {
+  position: relative;
+  display: inline-block;
+}
+
+.action_kebab {
+  align-self: center;
+  position: relative;
+  margin-left: auto;
+}
+
+.dropdown_button {
+  padding: .5rem 1rem;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid rgb(190, 190, 190);
+  right: 0;
+  z-index: 1;
+  animation: .2s linear slide-in;
+}
+
+@keyframes slide-in {
+  0% {
+    margin-right: -100%;
+    opacity: 0%;
+  }
+  100% {
+    margin-right: 0;
+    opacity: 100%;
+  }
+}
+
+.dropdown-content .dropdown_button:hover {
+  background-color: #ddd;
+  cursor: pointer;
+
+  @media screen and (max-width: 960px) {
+    &:hover {
+      background-color: unset;
+      cursor: unset;
+    }
+  }
+}

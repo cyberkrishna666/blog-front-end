@@ -1,0 +1,49 @@
+.comments_container {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+
+  .comment {
+    justify-self: center;
+    margin-top: 1rem;
+    padding: .5rem;
+    text-align: left;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: .5rem;
+
+    header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      
+      .comment_author {
+        font-size: .8rem;
+          a {
+            font-weight: bold;
+            text-decoration: none;
+            color: inherit;
+            margin-right: .5rem;
+          }
+
+        .name {}
+
+        .date {
+          color: rgb(150, 150, 150);
+        }
+      }
+    }
+
+    .comment_content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin: .5rem 0;
+
+      .comment_text {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

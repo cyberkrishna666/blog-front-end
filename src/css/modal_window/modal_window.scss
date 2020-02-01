@@ -1,0 +1,97 @@
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  opacity: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: all 1s ease;
+  -webkit-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  transition: all .3s linear;
+  -webkit-animation: fade-in .3s linear;
+          animation: fade-in .3s linear;
+
+  @-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.modal {
+  width: 50%;
+  height: 50%;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  position: relative;
+  
+  .close_button {
+    margin: 0;
+    padding: .7rem;
+    position: absolute;
+    font-size: 1.8rem;
+    z-index: 1;
+    top: 0px;
+    right: 0;
+    
+    &:hover {
+      cursor: pointer;
+    }
+   }
+
+   -webkit-transition: all .3s linear;
+   -o-transition: all .3s linear;
+   transition: all .3s linear;
+   -webkit-animation: fade-in .3s linear;
+           animation: fade-in .3s linear;
+
+   @-webkit-keyframes fade-in {
+     0% {
+       opacity: 0;
+     }
+     100% {
+       opacity: 1;
+     }
+   }
+
+   @keyframes fade-in {
+     0% {
+       opacity: 0;
+     }
+     100% {
+       opacity: 1;
+     }
+   }
+}
+
+
+
+@media screen and (max-width: 414px) {
+  .modal {
+    width: 100%;
+    height: 100%;
+  }
+}

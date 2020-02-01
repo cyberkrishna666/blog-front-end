@@ -13,8 +13,8 @@ export const userReducer = (state, action) => {
       window.localStorage.setItem('loggedUser', JSON.stringify(action.payload.globalUser))
       return {
         ...state,
-        isAuthenticated: true,
-        globalUser: action.payload.globalUser
+        globalUser: action.payload.globalUser,
+        isAuthenticated: true
       }
 
       case 'LOGOUT':
